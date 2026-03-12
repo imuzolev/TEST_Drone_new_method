@@ -18,8 +18,8 @@
 |--------|--------|-----|--------|---------------|---------|
 | lidar_preprocessor | **B.1** ✅ | готов | ✅ | ✅ ~9Hz, 1196pts | TF2 world-frame фильтр добавлен |
 | drone_bringup (loop2.launch.py) | **B.2** ✅ | готов | ✅ | ✅ 4 ноды | use_sim_time пропагация через SetParameter |
-| rack_follower (C++) | B.3 | готов | нет | нет | ADJUSTING loop замкнут — проверить при тюнинге |
-| px4_bridge (C++) | B.3, B.4 | готов | нет | нет | — |
+| rack_follower (C++) | B.3 | готов | ✅ | нет | Итерация 2: TF + Z-фильтры готовы — тюнинг Kp/Kd |
+| px4_bridge (C++) | B.3, B.4 | готов | ✅ | нет | Итерация 2: TF world→base_link, Body→NED маппинг |
 | twist_mux_config (YAML + launch) | B.5 | готов | нет | нет | — |
 | barcode_scanner + scan_policy_fsm | C.3–C.5 | готов | нет | нет | зависимость от SLAM убрана |
 | SDF мир (warehouse_phase0.sdf) | C.2 | готов | — | нет | — |
@@ -109,6 +109,7 @@
   - ~~**Проверка:** все 4 ноды стартуют, `ros2 node list` показывает их, статусы публикуются~~ ✅ 4 ноды, 3 status топика + /diagnostics
 
 - [ ] **B.3** — Тюнинг PD-контроллера rack_follower
+  - ~~Итерация 2 (ERR-011, ERR-012): TF world→base_link, Body FLU→NED, Z-фильтры 0.05/0.3 м~~ ✅
   - Запустить в Gazebo, наблюдать lateral_error через `ros2 topic echo`
   - Подобрать Kp, Kd, base_speed экспериментально
   - Записать rosbag: `ros2 bag record /drone/control/rack_follower/wall_distance`

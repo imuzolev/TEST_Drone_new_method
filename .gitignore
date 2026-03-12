@@ -27,3 +27,7 @@ Thumbs.db
 
 # PX4 / generated
 **/msg/idl.cc
+
+# Rosbags (large binary, exceeds GitHub 100MB limit)
+rosbags/
+*.db3
